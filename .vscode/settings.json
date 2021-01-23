@@ -1,0 +1,9 @@
+{
+    "editor.renderWhitespace": "all",
+    "editor.wordWrap": "on",
+    "debug.inlineValues": true,
+    "debug.showSubSessionsInToolBar": true,
+    "terminal.integrated.confirmOnExit": true,
+    "git.enableCommitSigning": true,
+    "git.enableSmartCommit": true
+}

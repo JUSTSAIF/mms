@@ -4,14 +4,7 @@ import CheckLogin from "../functions/checkLogin";
 // import Loader from '../inc/loader/loader';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios'
-import {
-    indexGET,
-    Pic,
-    Contact,
-    Username,
-    Name,
-    Reset_Password
-} from "../../API";
+import { indexGET, Pic, GeneralInfo } from "../../API";
 import './main.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -22,7 +15,6 @@ const headers = { 'Content-Type': 'application/json' }
 
 class Settings extends Component {
     state = {
-        newContactType: null,
         CreateTime: null,
         ExpireTime: null,
         IP: null,
@@ -37,14 +29,10 @@ class Settings extends Component {
         fb: null,
         ig: null,
         email: null,
-        NewFB: null,
-        NewIG: null,
-        NewEmail: null,
-        NewName: null,
-        NewPassword:null,
-        OldPassword:null,
-        err_reset_pass:null,
-        loading:true
+        NewPassword: null,
+        OldPassword: null,
+        err_reset_pass: null,
+        loading: true
     }
     componentDidMount() {
         axios.get(indexGET + "?token=" + encodeURIComponent(localStorage.getItem('token')), { headers: headers }).then((response) => {
@@ -57,17 +45,12 @@ class Settings extends Component {
                     IP: response.data.IP,
                     GetProfilePic: response.data.ProfilePic,
                     CreateTime: response.data.CreateTime,
-                    NewUsername: response.data.Username,
-                    NewFB: response.data.Contact.facebook,
-                    NewIG: response.data.Contact.instagram,
-                    NewEmail: response.data.Contact.email,
                     fb: response.data.Contact.facebook,
                     ig: response.data.Contact.instagram,
                     email: response.data.Contact.email,
-                    NewName: response.data.Name,
-                    loading:false
-                });    
-            } catch (error) {console.log("Update State Err !!");}
+                    loading: false
+                });
+            } catch (error) { console.log("Update State Err !!"); }
         })
     }
 
@@ -82,12 +65,12 @@ class Settings extends Component {
             })
         }.bind(this);
     }
-    
+
     profilePicSaveHandler = () => {
         let data = new FormData();
         data.append("token", localStorage.getItem('token'));
         data.append("base64", this.state.profileImgRef);
-        this.setState({loading:true});
+        this.setState({ loading: true });
         axios.post(Pic, data, {
             headers: headers
         }).then((response) => {
@@ -106,8 +89,13 @@ class Settings extends Component {
                 draggable: true,
                 progress: undefined,
             })
-            this.setState({loading:false});
+            this.setState({ loading: false });
         });
+    }
+    
+    componentWillUnmount() {
+        const initialState = {};
+        this.setState(initialState);
     }
 
     toastViewer = msg => {
@@ -123,68 +111,21 @@ class Settings extends Component {
     }
 
     saveChanges = () => {
-        var msg = "";
         let data = new FormData();
         data.append("token", localStorage.getItem('token'));
-        if (this.state.NewUsername !== this.state.Username) {
-            data.append("newUSR", this.state.NewUsername);
-            axios.post(Username, data, { headers: headers }).then((response) => {
-                if (response.data.msg === "done") {
-                    msg = "Username Changed Success 😀";
-                } else {
-                    msg = "Username Change Failed 😪";
-                }
-                this.toastViewer(msg);
-            });
-        }
-        if (this.state.NewName !== this.state.Name) {
-            data.append("newName", this.state.NewName);
-            axios.post(Name, data, { headers: headers }).then((response) => {
-                if (response.data.msg === "done") {
-                    msg = "Name Changed Success 😀";
-                } else {
-                    msg = "Name Change Failed 😪";
-                }
-                this.toastViewer(msg);
-            });
-        }
-        if (this.state.NewIG !== this.state.ig) {
-            data.append("type", "ig");
-            data.append("data", this.state.NewIG);
-            axios.post(Contact, data, { headers: headers }).then((response) => {
-                msg = "";
-                if (response.data.msg === "done") {
-                    msg = "Instagram User Changed Success 😀";
-                } else {
-                    msg = "Instagram User Change Failed 😪";
-                }
-                this.toastViewer(msg);
-            });
-        }
-        if (this.state.NewFB !== this.state.fb) {
-            data.append("type", "fb");
-            data.append("data", this.state.NewFB);
-            axios.post(Contact, data, { headers: headers }).then((response) => {
-                if (response.data.msg === "done") {
-                    msg = "Facebook User Changed Success 😀";
-                } else {
-                    msg = "Facebook User Change Failed 😪";
-                }
-                this.toastViewer(msg);
-            });
-        }
-        if (this.state.NewEmail !== this.state.email) {
-            data.append("type", "email");
-            data.append("data", this.state.NewEmail);
-            axios.post(Contact, data, { headers: headers }).then((response) => {
-                if (response.data.msg === "done") {
-                    msg = "E-mail Changed Success 😀";
-                } else {
-                    msg = "E-mail Change Failed 😪";
-                }
-                this.toastViewer(msg);
-            });
-        }
+        data.append("newName", this.state.Name);
+        data.append("email", this.state.email);
+        data.append("fb", this.state.fb);
+        data.append("ig", this.state.ig);
+        data.append("newUSR", this.state.Username);
+        axios.post(GeneralInfo, data, { headers: headers }).then((response) => {
+            if (response.data.name === "done" & response.data.contact === "done" & response.data.user === "done") {
+                this.toastViewer("Changed Success 😀");
+            } else {
+                this.toastViewer("Change Failed 😪");
+            }
+            console.log(response.data)
+        });
         this.componentDidMount();
     }
 
@@ -193,13 +134,13 @@ class Settings extends Component {
         data.append("token", localStorage.getItem('token'));
         data.append("oldPass", this.state.OldPassword);
         data.append("newPass", this.state.NewPassword);
-        axios.post(Reset_Password, data, { headers: headers }).then((response) => {
-            var msg = response.data.msg;
-            if(msg === "done"){
+        axios.post(GeneralInfo, data, { headers: headers }).then((response) => {
+            var msg = response.data.newPass;
+            if (msg === "done") {
                 this.toastViewer("Password Changed Success 😀");
-                this.setState({err_reset_pass:null});
-            }else{
-                this.setState({err_reset_pass:msg});
+                this.setState({ err_reset_pass: null });
+            } else {
+                this.setState({ err_reset_pass: msg });
             }
         });
         this.componentDidMount();
@@ -227,13 +168,13 @@ class Settings extends Component {
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label className="form-control-label" htmlFor="input-username" >Username</label>
-                                        <input type="text" id="input-username" className="form-control" onChange={(e) => { this.setState({ NewUsername: e.target.value }) }} placeholder="Username" defaultValue={this.state.Username} />
+                                        <input type="text" id="input-username" className="form-control" onChange={(e) => { this.setState({ Username: e.target.value }) }} placeholder="Username" defaultValue={this.state.Username} />
                                     </div>
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label className="form-control-label" htmlFor="input-email">Name</label>
-                                        <input type="email" id="input-email" className="form-control" onChange={(e) => { this.setState({ NewName: e.target.value }) }} placeholder="Name" defaultValue={this.state.Name} />
+                                        <input type="email" id="input-email" className="form-control" onChange={(e) => { this.setState({ Name: e.target.value }) }} placeholder="Name" defaultValue={this.state.Name} />
                                     </div>
                                 </div>
                             </div>
@@ -243,19 +184,19 @@ class Settings extends Component {
                                 <div className="col-lg-4">
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend"><span className="input-group-text" id="basic-addon1">@</span></div>
-                                        <input type="text" className="form-control" placeholder="ex : someone@me.com" onChange={(e) => { this.setState({ NewEmail: e.target.value }) }} defaultValue={this.state.email !== null | this.state.email !== "" ? this.state.email : null} />
+                                        <input type="text" className="form-control" placeholder="ex : someone@me.com" onChange={(e) => { this.setState({ email: e.target.value }) }} defaultValue={this.state.email} />
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend"><span className="input-group-text" id="basic-addon1"><i className="fa fa-instagram"></i></span></div>
-                                        <input type="text" className="form-control" placeholder="Username ex : qq_iq" onChange={(e) => { this.setState({ NewIG: e.target.value }) }} defaultValue={this.state.ig !== null | this.state.ig !== "" ? this.state.ig : null} />
+                                        <input type="text" className="form-control" placeholder="Username ex : qq_iq" onChange={(e) => { this.setState({ ig: e.target.value }) }} defaultValue={this.state.ig} />
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="input-group mb-3">
                                         <div className="input-group-prepend"><span className="input-group-text" id="basic-addon1"><i className="fa fa-facebook"></i></span></div>
-                                        <input type="text" className="form-control" placeholder="Username ex : qq_iq" onChange={(e) => { this.setState({ NewFB: e.target.value }) }} defaultValue={this.state.fb !== null | this.state.fb !== "" ? this.state.fb : null} />
+                                        <input type="text" className="form-control" placeholder="Username ex : qq_iq" onChange={(e) => { this.setState({ fb: e.target.value }) }} defaultValue={this.state.fb} />
                                     </div>
                                 </div>
                             </div>
@@ -283,12 +224,12 @@ class Settings extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="message-text" className="col-form-label"><span className="red-point">*</span>Password :</label>
-                                        <input type="text" className="form-control" placeholder="Old Password" onChange={(e) => { this.setState({ OldPassword: e.target.value }) }} defaultValue="" required />
+                                        <input type="password" className="form-control" placeholder="Old Password" onChange={(e) => { this.setState({ OldPassword: e.target.value }) }} defaultValue="" required />
                                     </div>
                                 </form>
-                                {this.state.err_reset_pass !== null ? 
-                                <p className="err_paragraph">{this.state.err_reset_pass}</p>
-                                : null}
+                                {this.state.err_reset_pass !== null ?
+                                    <p className="err_paragraph">{this.state.err_reset_pass}</p>
+                                    : null}
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

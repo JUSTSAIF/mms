@@ -9,12 +9,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CheckLogin from "../functions/checkLogin";
 import { Helmet } from 'react-helmet'
+
 const Login = () =>{
     var username    = "";
     var password    = "";
-    var checkLogin  = "";
     var token       = "";
     
+    const toastViewer = msg => {
+        toast.dark(msg, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+
     const login = (e) => {
         e.preventDefault();
         /// check user name and password 
@@ -22,23 +34,11 @@ const Login = () =>{
         let data = new FormData();
         data.append("username", username);
         data.append("password", password);
-        axios.post(Login_check, data, {
-            headers: headers
-        })
-        .then((response) => {
+        axios.post(Login_check, data, {headers: headers}).then((response) => {
             const Res = response.data.msg.res;
-            checkLogin = Res;
-            toast.dark(checkLogin, {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                })
             setTimeout(() => {
                 if(Res === "login success"){
+                    toastViewer(Res+" 😄")
                     axios.post(tokensGenerator, data, {
                         headers: headers
                     })
@@ -51,8 +51,10 @@ const Login = () =>{
                             window.location.reload(false);
                         }
                     })
+                }else{
+                    toastViewer(response.data.msg+ " 😥")
                 }
-            }, 3000)
+            }, 1)
         }).catch(error => {
             console.log(error)
         })

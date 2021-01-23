@@ -8,13 +8,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./admin-login.css";
 import CheckLoginAdmin from '../../functions/checkLoginAdmin';
-
 class AdminLogin extends Component {
     state = {
-        username:"",
-        password:"",
-        token:"",
-        autoLogin:false
+        username: "",
+        password: "",
+        token: "",
+        autoLogin: false,
     }
 
     toastViewer = msg => {
@@ -41,7 +40,7 @@ class AdminLogin extends Component {
         })
             .then((response) => {
                 var Res = response.data.msg.res;
-                if(Res === undefined){Res = response.data.msg}
+                if (Res === undefined) { Res = response.data.msg }
                 const role = response.data.msg.roleID;
                 if (Res === "login success" & (role === 1 | role === 2)) {
                     this.toastViewer(Res);
@@ -51,10 +50,10 @@ class AdminLogin extends Component {
                         }).then((response) => {
                             const msg = response.data.msg;
                             if (msg === "token created successfully") {
-                                this.setState({token:response.data.token})
-                                if(this.state.autoLogin === true){
+                                this.setState({ token: response.data.token })
+                                if (this.state.autoLogin === true) {
                                     localStorage.setItem('admin_token', response.data.token);
-                                }else{
+                                } else {
                                     sessionStorage.setItem('admin_token', response.data.token);
                                 }
                                 window.location.reload(false);
@@ -62,9 +61,9 @@ class AdminLogin extends Component {
                         })
                     }, 3000)
                 } else {
-                    if(Res !== "login success"){
+                    if (Res !== "login success") {
                         this.toastViewer(Res);
-                    }else{
+                    } else {
                         this.toastViewer("u are not admin 🤕");
                     }
                 }
@@ -72,8 +71,8 @@ class AdminLogin extends Component {
                 console.log(error)
             })
     }
-    
-    render(){
+
+    render() {
         return (
             <>
                 <CheckLoginAdmin page="/ad-home" />
@@ -87,16 +86,16 @@ class AdminLogin extends Component {
                                 <h3 className="login-title">Admin Login</h3>
                                 <form onSubmit={this.loginA}>
                                     <div className="in-form-div">
-                                        <input className="input" type="text" name="email" placeholder="Username" onChange={(e)=>{this.setState({username:e.target.value})}} />
+                                        <input className="input" type="text" name="email" placeholder="Username" onChange={(e) => { this.setState({ username: e.target.value }) }} />
                                         <span className="focus-in"></span>
                                         <span className="input-f-logo"><i className="fa fa-envelope" aria-hidden="true"></i></span>
                                     </div>
                                     <div className="in-form-div">
-                                        <input className="input" type="password" name="pass" placeholder="Password" onChange={(e) => { this.setState({password:e.target.value}) }} />
+                                        <input className="input" type="password" name="pass" placeholder="Password" onChange={(e) => { this.setState({ password: e.target.value }) }} />
                                         <span className="focus-in"></span>
                                         <span className="input-f-logo"><i className="fa fa-lock" aria-hidden="true"></i></span>
                                     </div>
-                                    <input className="form-check-input" type="checkbox" onChange={(e)=>{this.setState({autoLogin:e.target.checked})}} id="saveLogin"/>
+                                    <input className="form-check-input" type="checkbox" onChange={(e) => { this.setState({ autoLogin: e.target.checked }) }} id="saveLogin" />
                                     <label className="form-check-label" htmlFor="saveLogin">Auto Login</label>
                                     <div className="login-form-btn">
                                         <button className="login-f-btn" >Login</button>
@@ -108,7 +107,7 @@ class AdminLogin extends Component {
                 </div>
                 <ToastContainer />
             </>
-        );    
+        )
     }
 }
 
