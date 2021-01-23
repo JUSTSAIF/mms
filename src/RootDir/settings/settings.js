@@ -26,9 +26,9 @@ class Settings extends Component {
         profileImgRef: null,
         isProfilePicChanged: false,
         GetProfilePic: null,
-        fb: null,
-        ig: null,
-        email: null,
+        fb: "",
+        ig: "",
+        email: "",
         NewPassword: null,
         OldPassword: null,
         err_reset_pass: null,
@@ -114,9 +114,9 @@ class Settings extends Component {
         let data = new FormData();
         data.append("token", localStorage.getItem('token'));
         data.append("newName", this.state.Name);
-        data.append("email", this.state.email);
-        data.append("fb", this.state.fb);
-        data.append("ig", this.state.ig);
+        if(this.state.email !== null){ data.append("email", this.state.email)};
+        if(this.state.fb !== null){ data.append("fb", this.state.fb)};
+        if(this.state.ig !== null){ data.append("ig", this.state.ig)};
         data.append("newUSR", this.state.Username);
         axios.post(GeneralInfo, data, { headers: headers }).then((response) => {
             if (response.data.name === "done" & response.data.contact === "done" & response.data.user === "done") {
@@ -179,7 +179,8 @@ class Settings extends Component {
                                 </div>
                             </div>
                             <hr className="set-hr" />
-                            <label className="form-control-label" htmlFor="input-first-name">contact</label>
+                            <label className="form-control-label" htmlFor="input-first-name" aria-describedby="tipforContact">contact</label>
+                            <small id="tipforContact" class="form-text text-muted">You must fill all contact fields or keep it empty 😋.</small><br/>
                             <div className="row">
                                 <div className="col-lg-4">
                                     <div className="input-group mb-3">
