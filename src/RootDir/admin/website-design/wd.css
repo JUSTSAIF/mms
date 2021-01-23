@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+.our_row {
+    margin: 40px auto;
+    background: linear-gradient(to left, rgba(90, 2, 2, 0.844), rgba(7, 31, 111, 0.671));
+    color: rgb(226, 226, 226);
+    border-radius: 7px;
+    width: 100%;
+    padding: 20px;
+}
+
+.title {
+    justify-content:center;
+    font-size: 33px;
+    font-family: 'Josefin Sans', sans-serif;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.hide_card {
+    width: 90% !important;
+}
+
+.wd_last_bu {
+    margin-top: 30px;
+}
+
+.input_fd {
+    border-radius: 0;
+    background-color: rgb(218, 218, 218);
+    transition: all ease-in 0.5s;
+}
+
+.input_fd_cy {
+    display: inline;
+    width: 41px;
+    padding: 0;
+}
+#MyVpCheckBox {
+    float: right;
+    margin: 3px;
+}
+
+#MyVpCheckBox label{
+    margin-right: 5px;
+}
+
+.HappyClientsPO {
+    cursor: not-allowed;    
+}
+
+.mt-mob-s-bu {
+    padding-top: 24px;
+}
+
+.mt-mob-s-bu2 {
+    padding-top: 24px;
+}
+
+hr {
+    border: 1px solid rgba(197, 197, 197, 0.755);
+}
+
+.show_bg_image {
+    border: 3px solid rgb(179, 179, 179);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.sbi_paren {
+    margin-bottom: 30px;
+}
+
+.dropdown-menu {
+    transform: none !important;
+}
+/* Mobile / Tab Screen */
+@media only screen and (max-width: 767px) { 
+    .title {
+        font-size: 20px;
+    }
+    .wd_last_bu:last-child .btn-success {
+        margin-top: 10px;
+    }
+    .show_bg_image {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 992px) { 
+    .mt-mob-si {
+        margin-top: 10px;
+    }
+    .mt-mob-s-bu2 {
+        padding-top: 48px;
+    }
+}

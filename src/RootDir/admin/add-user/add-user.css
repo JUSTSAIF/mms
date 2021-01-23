@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.add_user {
+    margin: 40px auto;
+    background: linear-gradient(to right, rgba(23, 14, 43, 0.918), rgba(44, 12, 12, 0.904));
+    border-radius: 7px;
+    width: 70%;
+    height: 520px;
+    padding: 20px;
+    color: rgb(226, 226, 226);
+}
+
+.add_user #usernameHelp {
+    font-size: 10px;
+}
+
+.add_user hr {
+    border: 1px solid rgba(197, 197, 197, 0.755);
+}
+
+.add_user .RandPass {
+    position: inherit;
+    border: 0;
+    outline: 0;
+    background-color: #6d7379e3;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: all ease-out 3s;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    float: right;
+    color: #000;
+}
+
+.add_user .RandPass:active {
+    background-color: #4197ede3;
+    color: rgb(255, 255, 255);
+    border-radius: 100px;
+    transition: all ease-in .1s;
+}
+
+
+/* ================ Account Red Done Button Style ================  */
+.add_user .account_reg_done {
+    margin-top: 112px;
+}
+
+.add_user .last_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 200px;
+    height: 51px;
+    border: 1px solid rgba(255, 255, 255, 1);
+    font-size: 2rem;
+    cursor: pointer;
+    font-family: 'Anton', sans-serif;
+
+
+}
+
+.add_user .last_button > .text {
+    position: relative;
+    color: transparent;
+    background-image: linear-gradient(90deg, rgba(220, 120, 150, 1) 0%, rgba(220, 120, 150, 1) 50%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    background-repeat: repeat;
+    background-size: 200%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: background-position 300ms;
+    width: 100%;
+}
+.add_user .last_button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 1);
+    transform-origin: 100% 0;
+    transform: scale3d(0, 1, 1);
+    transition: transform 300ms;
+}
+
+.add_user .last_button:hover .text {
+    background-position: 0 0;
+}
+
+.add_user .last_button:hover::before {
+    transform-origin: 0 0;
+    transform: scale3d(1, 1, 1);
+}
+
+/*  ====================== ** Mobile Screen  ** ======================  */
+
+@media only screen and (max-width: 767px) { 
+    .add_user { width: 95%; } 
+    .add_user .name-c-input {
+        margin-top: 10px;
+    }
+    .add_user .account_reg_done {
+        margin-top: 20px;
+    }    
+}
+
+#Create-Account-vif .badge {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(27, 27, 27) !important;
+    background-color: rgba(0, 0, 0, 0.356);
+}
+
+#Create-Account-vif .modal-body p span {
+    color: rgb(255, 0, 0);
+}
+
+#Create-Account-vif .modal-body p {
+    font-size: small;
+}
+
+#Create-Account-vif .modal-body p {
+    font-size: small;
+}
+
+#Create-Account-vif .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

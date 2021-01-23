@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+.table-head th {
+    background-color: rgba(0, 0, 0, 0.699);
+    color: rgb(219, 219, 219);
+    font-style: oblique;
+    font-weight: normal;
+    font-family: 'Amiri', serif;
+}
+
+.table-res td {
+    color: rgb(219, 219, 219);
+    font-family: 'Cairo';
+    background-color: rgb(99 103 117 / 93%);
+}
+
+.ad-home .pagination {
+    line-height: 30px;
+    color: rgb(195, 195, 195);
+    letter-spacing: 6px;
+    /* padding: 5px; */
+}
+
+.ad-home .pagination .active {
+    color: rgb(255, 255, 255);
+}
+
+.ad-home .pagination .previous {
+    margin-right: 10px;
+    background-color: rgba(54, 54, 133, 0.787);
+    padding: 5px;
+    border-radius: 10px;
+    letter-spacing: 0px;
+}
+
+.ad-home .pagination .next {
+    margin-left: 10px;
+    letter-spacing: 0px;
+    background-color: rgba(54, 54, 133, 0.787);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.ad-home .table-search {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 17px;
+    padding: 6px;
+    border: none;
+}
+
+.ad-home .table-search-icon {
+    background: rgba(255, 255, 255, 0);
+    color: rgba(143, 95, 233, 0.52);
+    position: absolute;
+    font-size: 26px;
+    cursor: wait;
+    margin-left: -30px;
+    margin-top: 20px;
+}
+
+.table-responsive {
+    max-height: 100%;
+}
+
+.ad-home #myTable {
+    border: 0;
+}
+
+.ad-home .delete-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ad-home .mob-dc-button button {
+    margin-bottom: 10px;
+}
+
+.ad-home #moreuserinfo .modal-body h4 {
+    margin-top: 10px;
+    font-style: oblique;
+    font-weight: normal;
+    font-family: 'Amiri', serif;
+    color: rgb(0, 0, 0);
+}
+
+.ad-home #moreuserinfo .modal-body h4 span {
+    color: rgb(180, 16, 16);
+}
+
+.ad-home #moreuserinfo .modal-body .real-c h5 {
+    font-family: 'Patua One', cursive;
+    color: rgb(97, 87, 151);
+}
+
+.ad-home #moreuserinfo .modal-body .real-c .badge {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(27, 27, 27) !important;
+    background-color: rgba(0, 0, 0, 0.356);
+}
+
+.ad-home #moreuserinfo .modal-body .real-c hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.445);
+}

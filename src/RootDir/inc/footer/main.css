@@ -1,0 +1,8 @@
+div .footer-nav-g {
+    /* background-color: rgba(190, 191, 246, 0.294); */
+    background-image: linear-gradient(to top, rgba(13, 2, 22, 0.76), rgba(0, 0, 0, 0.116) 100%);
+    color: rgba(161, 161, 161, 0.952);
+}
+
+
+/* pointer-events: none; */
